@@ -1,15 +1,12 @@
 import { Text, View } from '@/components/Themed'
 import Colors from '@/constants/Colors'
+import { defaultPizzaImage } from '@/constants/Helpers'
 import { Product } from '@/types'
 import { Link } from 'expo-router'
 import { Image, Pressable, StyleSheet } from 'react-native'
-
 type ProdcutListItemProps = {
   product: Product
 }
-
-const defaultPizzaImage =
-  'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png'
 
 const ProductListItem = ({ product }: ProdcutListItemProps) => {
   return (
