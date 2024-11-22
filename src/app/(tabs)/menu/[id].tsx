@@ -14,7 +14,7 @@ const ProductDetailsScreen = () => {
   const product = products.find((p) => p.id.toString() === id)
 
   const addToCard = () => {
-    console.warn('Add to card', product, selectedSize)
+    console.warn('Adding to card', product?.name, selectedSize)
   }
 
   if (!product) {
