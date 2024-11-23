@@ -1,10 +1,10 @@
 import Button from '@/components/Button'
+import Colors from '@/constants/Colors'
+import { Link, Stack } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 
-const SignUp = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -26,18 +26,7 @@ const SignUp = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={firstName}
-        onChangeText={setFirstName}
-        placeholder="First name"
-      />
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={setLastName}
-        placeholder="Last name"
-      />
+      <Stack.Screen options={{ title: 'Sign In' }} />
       <TextInput
         style={styles.input}
         value={email}
@@ -49,10 +38,14 @@ const SignUp = () => {
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
+        secureTextEntry
       />
-      {error && <Text style={styles.error}>{error}</Text>}
-      <Text style={styles.loading}>{loading ? 'Loading...' : ''}</Text>
-      <Button onPress={handleSubmit} text="Sign up!" />
+      {error && <Text style={styles.errorText}>{error}</Text>}
+      <Text>{loading ? 'Loading...' : ''}</Text>
+      <Button onPress={handleSubmit} text="Sign in" />
+      <Link href="/(auth)/sign-up/" style={styles.link}>
+        Go to register!
+      </Link>
     </View>
   )
 }
@@ -61,7 +54,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 16
+    padding: 16,
+    backgroundColor: '#fff'
   },
   input: {
     height: 40,
@@ -71,13 +65,16 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingHorizontal: 8
   },
-  error: {
-    color: 'tomato',
+  errorText: {
+    color: 'red',
     marginBottom: 12
   },
-  loading: {
-    marginBottom: 12
+  link: {
+    color: Colors.light.tint,
+    marginTop: 12,
+    textDecorationLine: 'underline',
+    textAlign: 'center'
   }
 })
 
-export default SignUp
+export default SignIn

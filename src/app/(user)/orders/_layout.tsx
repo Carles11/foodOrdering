@@ -1,7 +1,5 @@
 import { Stack } from 'expo-router'
 
-const AuthLayout = () => {
+export default function OrdersStack() {
   return <Stack />
 }
-
-export default AuthLayout

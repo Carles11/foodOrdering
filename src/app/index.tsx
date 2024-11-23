@@ -8,7 +8,7 @@ const index = () => {
 
   if (!userIsLoggedIn) {
     console.log('user is logged in')
-    return <Redirect href="/(auth)/sign-in" />
+    return <Redirect href="/sign-in" />
   } else {
     return (
       <View style={{ flex: 1, justifyContent: 'center', padding: 10 }}>
@@ -17,6 +17,9 @@ const index = () => {
         </Link>
         <Link href={'/(admin)'} asChild>
           <Button text="Admin" />
+        </Link>
+        <Link href={'/sign-in'} asChild>
+          <Button text="Sign in" />
         </Link>
       </View>
     )
