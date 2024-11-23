@@ -2,9 +2,10 @@ import Button from '@/components/Button'
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
 import * as ImagePicker from 'expo-image-picker'
-import { Stack } from 'expo-router'
+import { Stack, useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
 import {
+  Alert,
   Image,
   Pressable,
   StyleSheet,
@@ -18,6 +19,9 @@ const CreateProductScreen = () => {
   const [price, setPrice] = useState('')
   const [image, setImage] = useState<string | null>(null)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
+
+  const { id } = useLocalSearchParams()
+  const isUpdating = !!id
 
   const validateInputs = () => {
     if (!name) {
@@ -52,6 +56,33 @@ const CreateProductScreen = () => {
     resetFields()
   }
 
+  const onUpdate = () => {
+    if (!validateInputs()) {
+      return
+    }
+    console.warn('Updating product', { name, price })
+    resetFields()
+  }
+
+  const onDelete = () => {
+    console.log('delete')
+  }
+
+  const confirmDelete = () => {
+    Alert.alert('Confirm', 'Are you sure you want to delete this product?', [
+      { text: 'Delete', style: 'destructive', onPress: () => onDelete() },
+      { text: 'Cancel' }
+    ])
+  }
+
+  const onSubmit = () => {
+    if (isUpdating) {
+      onUpdate()
+    } else {
+      onCreate()
+    }
+  }
+
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
@@ -69,7 +100,9 @@ const CreateProductScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: 'Create Product' }} />
+      <Stack.Screen
+        options={{ title: isUpdating ? 'Update Product' : 'Create Product' }}
+      />
       <Image
         source={{ uri: image || defaultPizzaImage }}
         style={styles.image}
@@ -98,7 +131,11 @@ const CreateProductScreen = () => {
           {errors[key]}
         </Text>
       ))}
-      <Button text="create" onPress={() => onCreate()} />
+      <Button
+        text={isUpdating ? 'Update' : 'Create'}
+        onPress={() => onSubmit()}
+      />
+      {isUpdating && <Button text="Delete" onPress={() => confirmDelete()} />}
     </View>
   )
 }

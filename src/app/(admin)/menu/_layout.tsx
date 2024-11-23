@@ -28,26 +28,6 @@ export default function MenuStack() {
           )
         }}
       />
-      <Stack.Screen
-        name="[id]"
-        options={{
-          title: 'Menu',
-          headerRight: () => (
-            <Link href="/" asChild>
-              <Pressable hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="pencil"
-                    size={25}
-                    color={Colors.light.tint}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          )
-        }}
-      />
     </Stack>
   )
 }
