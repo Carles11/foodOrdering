@@ -43,7 +43,7 @@ const SignIn = () => {
       {error && <Text style={styles.errorText}>{error}</Text>}
       <Text>{loading ? 'Loading...' : ''}</Text>
       <Button onPress={handleSubmit} text="Sign in" />
-      <Link href="/(auth)/sign-up/" style={styles.link}>
+      <Link href="/sign-up" style={styles.link}>
         Go to register!
       </Link>
     </View>
