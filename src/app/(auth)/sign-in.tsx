@@ -1,8 +1,9 @@
 import Button from '@/components/Button'
 import Colors from '@/constants/Colors'
+import { supabase } from '@/lib/supabase'
 import { Link, Stack } from 'expo-router'
 import { useState } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
@@ -10,10 +11,28 @@ const SignIn = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
+  async function signUpWithEmail({
+    email,
+    password
+  }: {
+    email: string
+    password: string
+  }) {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (error) {
+      Alert.alert(error.message)
+    } else {
+      Alert.alert('Signed-In Successfully!')
+    }
+  }
   const handleSubmit = async () => {
     setLoading(true)
     try {
-      // await signIn({ email, password })
+      await signUpWithEmail({ email, password })
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message)
@@ -42,7 +61,11 @@ const SignIn = () => {
       />
       {error && <Text style={styles.errorText}>{error}</Text>}
       <Text>{loading ? 'Loading...' : ''}</Text>
-      <Button onPress={handleSubmit} text="Sign in" />
+      <Button
+        onPress={handleSubmit}
+        text={loading ? 'Signing in...' : 'Log in!'}
+        disabled={loading}
+      />
       <Link href="/sign-up" style={styles.link}>
         Go to register!
       </Link>
