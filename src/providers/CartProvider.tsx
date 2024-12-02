@@ -7,6 +7,7 @@ type CartType = {
   updateQuantity: (itemId: string, amount: -1 | 1) => void
   total: number
 }
+
 export const CartContext = createContext({
   items: [],
   addItem: () => {},

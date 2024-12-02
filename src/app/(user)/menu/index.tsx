@@ -1,10 +1,21 @@
-import { FlatList, Platform, View } from 'react-native'
+import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
 
-import products from '@/assets/data/products'
 import ProductListItem from '@/components/ProductListItem'
+
+import { useProductList } from '@/app/api/products'
 import { StatusBar } from 'expo-status-bar'
 
 export default function MenuScreen() {
+  const { products, error, isLoading } = useProductList()
+
+  if (isLoading) {
+    return <ActivityIndicator />
+  }
+
+  if (error) {
+    return <Text>{error.message}</Text>
+  }
+
   return (
     <View>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
