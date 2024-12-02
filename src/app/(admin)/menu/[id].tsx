@@ -1,5 +1,5 @@
-import products from '@/assets/data/products'
-import Button from '@/components/Button'
+import { useProduct } from '@/app/api/products'
+
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
 import { useCart } from '@/providers/CartProvider'
@@ -12,13 +12,16 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 const sizes: PizzaSize[] = ['S', 'M', 'L', 'XL']
 
 const ProductDetailsScreen = () => {
-  const { id } = useLocalSearchParams()
+  const { id: idString } = useLocalSearchParams()
+
+  const id = parseFloat(typeof idString === 'string' ? idString : idString[0])
+
+  const { data: product, error, isLoading } = useProduct(id)
+
   const { addItem } = useCart()
 
   const [selectedSize, setSelectedSize] = useState<PizzaSize>('M')
   const router = useRouter()
-
-  const product = products.find((p) => p.id.toString() === id)
 
   const addToCard = () => {
     if (!product) return

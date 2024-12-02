@@ -5,7 +5,7 @@ import ProductListItem from '@/components/ProductListItem'
 import { StatusBar } from 'expo-status-bar'
 
 export default function MenuScreen() {
-  const { products, error, isLoading } = useProductList()
+  const { data: products, error, isLoading } = useProductList()
 
   if (isLoading) {
     return <ActivityIndicator />
