@@ -5,15 +5,17 @@ import { Link, Redirect } from 'expo-router'
 import { ActivityIndicator, View } from 'react-native'
 
 const index = () => {
-  const { session, loading } = useAuth()
-  console.log({ loading, session })
+  const { session, loading, isAdmin } = useAuth()
 
   if (loading) {
     return <ActivityIndicator />
   }
   if (!session) {
-    console.log('user is NOT logged in')
     return <Redirect href="/sign-in" />
+  }
+
+  if (!isAdmin) {
+    return <Redirect href="/(user)" />
   }
 
   return (
@@ -24,9 +26,7 @@ const index = () => {
       <Link href={'/(admin)'} asChild>
         <Button text="Admin" />
       </Link>
-      <Link href={'/sign-in'} asChild>
-        <Button text="Sign in" />
-      </Link>
+
       <Button onPress={() => supabase.auth.signOut()} text="Sign out" />
     </View>
   )
