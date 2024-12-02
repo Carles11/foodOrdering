@@ -11,7 +11,10 @@ import { useEffect } from 'react'
 import 'react-native-reanimated'
 
 import { useColorScheme } from '@/components/useColorScheme'
+
+import AuthProvider from '@/providers/AuthProvider'
 import CartProvider from '@/providers/CartProvider'
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary
@@ -54,22 +57,24 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <CartProvider>
-        <Stack>
-          <Stack.Screen name="(admin)" options={{ headerShown: false }} />
-          <Stack.Screen name="(user)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="cart"
-            options={{
-              presentation: 'containedTransparentModal', // Modal presentation style
-              gestureEnabled: true, // Enable swipe-to-dismiss gestures
-              gestureDirection: 'vertical', // Swipe down to dismiss
-              animation: 'slide_from_bottom' // Smooth animation
-            }}
-          />
-        </Stack>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Stack>
+            <Stack.Screen name="(admin)" options={{ headerShown: false }} />
+            <Stack.Screen name="(user)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="cart"
+              options={{
+                presentation: 'containedTransparentModal', // Modal presentation style
+                gestureEnabled: true, // Enable swipe-to-dismiss gestures
+                gestureDirection: 'vertical', // Swipe down to dismiss
+                animation: 'slide_from_bottom' // Smooth animation
+              }}
+            />
+          </Stack>
+        </CartProvider>
+      </AuthProvider>
     </ThemeProvider>
   )
 }

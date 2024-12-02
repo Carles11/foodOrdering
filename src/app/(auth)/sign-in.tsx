@@ -27,6 +27,7 @@ const SignIn = () => {
       Alert.alert(error.message)
     } else {
       Alert.alert('Signed-In Successfully!')
+      setLoading(false)
     }
   }
   const handleSubmit = async () => {

@@ -25,6 +25,7 @@ const SignUp = () => {
     if (error) {
       Alert.alert(error.message)
     }
+    setLoading(false)
   }
 
   const handleSubmit = async () => {
