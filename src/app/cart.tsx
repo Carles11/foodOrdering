@@ -4,7 +4,7 @@ import { useCart } from '@/providers/CartProvider'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 
 const CartScreen = () => {
-  const { items, total } = useCart()
+  const { items, total, checkout } = useCart()
   return (
     <View style={styles.container}>
       <Text>Cart items length: {items.length}</Text>
@@ -14,7 +14,7 @@ const CartScreen = () => {
         contentContainerStyle={{ padding: 10, gap: 10 }}
       />
       <Text style={{ fontSize: 20, fontWeight: 500 }}>Total: ${total}</Text>
-      <Button text="Checkout" onPress={() => {}} />
+      <Button text="Checkout" onPress={checkout} />
     </View>
   )
 }

@@ -1,10 +1,24 @@
-import { FlatList, Platform, View } from 'react-native'
+import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
 
-import orders from '@/assets/data/orders'
+import { useAdminOrdersList } from '@/api/orders'
 import OrdersListItem from '@/components/OrderListItem'
 import { StatusBar } from 'expo-status-bar'
 
-export default function MenuScreen() {
+export default function OrdersScreen() {
+  const {
+    data: orders,
+    isLoading,
+    error
+  } = useAdminOrdersList({ archived: false })
+
+  if (isLoading) {
+    return <ActivityIndicator />
+  }
+
+  if (error) {
+    return <Text>Failed to fetch</Text>
+  }
+
   return (
     <View>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />

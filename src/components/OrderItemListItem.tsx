@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 import { defaultPizzaImage } from '../constants/Helpers'
 import { OrderItem } from '../types'
+
 type OrderItemListItemProps = {
   item: OrderItem
 }
