@@ -1,11 +1,11 @@
-import { Text, View } from '@/components/Themed'
+import { Text } from '@/components/Themed'
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
-import { Product } from '@/types'
+import { Tables } from '@/types'
 import { Link, useSegments } from 'expo-router'
 import { Image, Pressable, StyleSheet } from 'react-native'
 type ProdcutListItemProps = {
-  product: Product
+  product: Tables<'products'>
 }
 
 const ProductListItem = ({ product }: ProdcutListItemProps) => {
