@@ -1,4 +1,9 @@
-import { useInsertProduct, useProduct, useUpdateProduct } from '@/api/products'
+import {
+  useDeleteProduct,
+  useInsertProduct,
+  useProduct,
+  useUpdateProduct
+} from '@/api/products'
 import Button from '@/components/Button'
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
@@ -28,7 +33,7 @@ const CreateProductScreen = () => {
   const { mutate: insertProduct } = useInsertProduct()
   const { mutate: updateProduct } = useUpdateProduct()
   const { data: updatingProduct } = useProduct(id)
-
+  const { mutate: deleteProduct } = useDeleteProduct()
   const router = useRouter()
 
   useEffect(() => {
@@ -95,7 +100,12 @@ const CreateProductScreen = () => {
   }
 
   const onDelete = () => {
-    console.log('delete')
+    deleteProduct(id, {
+      onSuccess: () => {
+        resetFields()
+        router.replace('/(admin)')
+      }
+    })
   }
 
   const confirmDelete = () => {
