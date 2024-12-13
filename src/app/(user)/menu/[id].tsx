@@ -1,4 +1,4 @@
-import { useProduct } from '@/app/api/products'
+import { useProduct } from '@/api/products'
 import Button from '@/components/Button'
 import { defaultPizzaImage } from '@/constants/Helpers'
 import { useCart } from '@/providers/CartProvider'

@@ -1,6 +1,6 @@
 import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
 
-import { useProductList } from '@/app/api/products'
+import { useProductList } from '@/api/products'
 import ProductListItem from '@/components/ProductListItem'
 import { StatusBar } from 'expo-status-bar'
 

@@ -2,7 +2,7 @@ import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
 
 import ProductListItem from '@/components/ProductListItem'
 
-import { useProductList } from '@/app/api/products'
+import { useProductList } from '@/api/products'
 import { StatusBar } from 'expo-status-bar'
 
 export default function MenuScreen() {

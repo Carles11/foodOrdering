@@ -1,4 +1,4 @@
-import { useProduct } from '@/app/api/products'
+import { useProduct } from '@/api/products'
 
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
