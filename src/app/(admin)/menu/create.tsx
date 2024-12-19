@@ -90,12 +90,15 @@ const CreateProductScreen = () => {
     )
   }
 
-  const onUpdate = () => {
+  const onUpdate = async () => {
     if (!validateInputs()) {
       return
     }
+
+    const imagePath = await uploadImage()
+
     updateProduct(
-      { id, name, price: parseFloat(price), image },
+      { id, name, price: parseFloat(price), image: imagePath },
       {
         onSuccess: () => {
           resetFields()
@@ -135,7 +138,6 @@ const CreateProductScreen = () => {
       .from('product-images')
       .upload(filePath, decode(base64), { contentType })
 
-    console.log({ data, error })
     if (data) {
       return data.path
     }

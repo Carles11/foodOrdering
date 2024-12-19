@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 import { defaultPizzaImage } from '../constants/Helpers'
 import { Tables } from '../types'
+import RemoteImage from './RemoteImage'
 
 type OrderItemListItemProps = {
   item: { products: Tables<'products'> | null } & Tables<'order_items'>
@@ -11,8 +12,9 @@ type OrderItemListItemProps = {
 const OrderItemListItem = ({ item }: OrderItemListItemProps) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: item.products?.image || defaultPizzaImage }}
+      <RemoteImage
+        path={item.products?.image}
+        fallback={defaultPizzaImage}
         style={styles.image}
         resizeMode="contain"
       />

@@ -18,8 +18,9 @@ const SignIn = () => {
     email: string
     password: string
   }) {
+    const cleanEmail = email.trim().toLowerCase()
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: cleanEmail,
       password
     })
 
