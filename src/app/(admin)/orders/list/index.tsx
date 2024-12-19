@@ -1,7 +1,9 @@
 import { ActivityIndicator, FlatList, Platform, Text, View } from 'react-native'
 
 import { useAdminOrdersList } from '@/api/orders'
+import { useInsertOrderSubscription } from '@/api/orders/subscriptions'
 import OrdersListItem from '@/components/OrderListItem'
+import { useQueryClient } from '@tanstack/react-query'
 import { StatusBar } from 'expo-status-bar'
 
 export default function OrdersScreen() {
@@ -10,6 +12,8 @@ export default function OrdersScreen() {
     isLoading,
     error
   } = useAdminOrdersList({ archived: false })
+
+  useInsertOrderSubscription()
 
   if (isLoading) {
     return <ActivityIndicator />
