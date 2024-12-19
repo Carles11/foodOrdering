@@ -121,6 +121,7 @@ export const useUpdateOrder = () => {
 
       return updatedOrder
     },
+
     async onSuccess(_, { id }) {
       await queryClient.invalidateQueries({ queryKey: ['orders'] })
       await queryClient.invalidateQueries({

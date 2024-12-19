@@ -23,6 +23,7 @@ const OrderDetailScreen = () => {
   const updateStatus = (status: any) => {
     updateOrder({ id: id, updatedFields: { status } })
   }
+
   if (!order) {
     return <Text>Order not found!</Text>
   }
@@ -51,7 +52,7 @@ const OrderDetailScreen = () => {
               {OrderStatusList.map((status) => (
                 <Pressable
                   key={status}
-                  onPress={() => updateStatus()}
+                  onPress={() => updateStatus(status)}
                   style={{
                     borderColor: Colors.light.tint,
                     borderWidth: 1,
