@@ -3,7 +3,10 @@ import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
 import { Tables } from '@/types'
 import { Link, useSegments } from 'expo-router'
-import { Image, Pressable, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
+
+import RemoteImage from './RemoteImage'
+
 type ProdcutListItemProps = {
   product: Tables<'products'>
 }
@@ -14,8 +17,9 @@ const ProductListItem = ({ product }: ProdcutListItemProps) => {
   return (
     <Link href={`./menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
-        <Image
-          source={{ uri: product.image || defaultPizzaImage }}
+        <RemoteImage
+          path={product.image}
+          fallback={defaultPizzaImage}
           style={styles.image}
           resizeMode="contain"
         />

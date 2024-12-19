@@ -1,4 +1,5 @@
 import { useProduct } from '@/api/products'
+import RemoteImage from '@/components/RemoteImage'
 
 import Colors from '@/constants/Colors'
 import { defaultPizzaImage } from '@/constants/Helpers'
@@ -54,8 +55,9 @@ const ProductDetailsScreen = () => {
         }}
       />
       <Stack.Screen options={{ title: product?.name }} />
-      <Image
-        source={{ uri: product?.image || defaultPizzaImage }}
+      <RemoteImage
+        path={product?.image}
+        fallback={defaultPizzaImage}
         style={styles.image}
       />
 
