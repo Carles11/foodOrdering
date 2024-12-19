@@ -1,4 +1,4 @@
-import { useOrderDetails } from '@/api/orders'
+import { useOrderDetails, useUpdateOrder } from '@/api/orders'
 import OrderItemListItem from '@/components/OrderItemListItem'
 import OrderListItem from '@/components/OrderListItem'
 import Colors from '@/constants/Colors'
@@ -18,7 +18,11 @@ const OrderDetailScreen = () => {
   const id = parseFloat(typeof idString === 'string' ? idString : idString?.[0])
 
   const { data: order, isLoading, error } = useOrderDetails(id)
+  const { mutate: updateOrder } = useUpdateOrder()
 
+  const updateStatus = (status: any) => {
+    updateOrder({ id: id, updatedFields: { status } })
+  }
   if (!order) {
     return <Text>Order not found!</Text>
   }
@@ -47,7 +51,7 @@ const OrderDetailScreen = () => {
               {OrderStatusList.map((status) => (
                 <Pressable
                   key={status}
-                  onPress={() => console.warn('Update status')}
+                  onPress={() => updateStatus()}
                   style={{
                     borderColor: Colors.light.tint,
                     borderWidth: 1,
