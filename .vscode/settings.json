@@ -1,29 +1,58 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": false,
-    "prettier.useEditorConfig": false,
-    "prettier.configPath": ".prettierrc",
-    "explorer.openEditors.sortOrder": "editorOrder",
-    "explorer.sortOrder": "default",
-    "eslint.enable": true,
-    "eslint.format.enable": true,
-    "eslint.validate": ["javascript"],
-    "eslint.options": {
-      "overrideConfig": {
-        "rules": {
-          "quotes": [1, "single", { "allowTemplateLiterals": true }]
-        }
-      },
-      "fix": true
-    },
-    "editor.codeActionsOnSave": {
-      "source.sortImports": "explicit",
-      "source.fixAll": "explicit",
-      "javascript.updateImportsOnFileMove.enabled": "explicit"
-    },
-    "files.exclude": {
-      "**/node_modules": false
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "deno.enablePaths": [
+    "supabase/functions"
+  ],
+  "deno.lint": true,
+  "deno.unstable": [
+    "bare-node-builtins",
+    "byonm",
+    "sloppy-imports",
+    "unsafe-proto",
+    "webgpu",
+    "broadcast-channel",
+    "worker-options",
+    "cron",
+    "kv",
+    "ffi",
+    "fs",
+    "http",
+    "net"
+  ],
+  "editor.codeActionsOnSave": {
+    "javascript.updateImportsOnFileMove.enabled": "explicit",
+    "source.fixAll": "explicit",
+    "source.sortImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.options": {
+    "fix": true,
+    "overrideConfig": {
+      "rules": {
+        "quotes": [
+          1,
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ]
+      }
     }
-  }
-  
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "explorer.openEditors.sortOrder": "editorOrder",
+  "explorer.sortOrder": "default",
+  "files.exclude": {
+    "**/node_modules": false
+  },
+  "prettier.configPath": ".prettierrc",
+  "prettier.useEditorConfig": false
+}
