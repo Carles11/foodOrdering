@@ -6,8 +6,6 @@ import { useState } from 'react'
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -35,8 +33,10 @@ const SignUp = () => {
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message)
+        console.error('Sign up error:', error.message)
       } else {
         setError('An unknown error occurred')
+        console.error('Sign up error: An unknown error occurred')
       }
     }
     setLoading(false)
@@ -46,18 +46,6 @@ const SignUp = () => {
     <View style={styles.container}>
       <Stack.Screen options={{ title: 'Sign Up' }} />
 
-      <TextInput
-        style={styles.input}
-        value={firstName}
-        onChangeText={setFirstName}
-        placeholder="First name"
-      />
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={setLastName}
-        placeholder="Last name"
-      />
       <TextInput
         style={styles.input}
         value={email}
