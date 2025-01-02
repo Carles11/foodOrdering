@@ -25,6 +25,7 @@ const SignIn = () => {
     })
 
     if (error) {
+      console.log({ error })
       Alert.alert(error.message)
     } else {
       Alert.alert('Signed-In Successfully!')

@@ -1,5 +1,6 @@
 import { Database } from '@/database.types'
 import { createClient } from '@supabase/supabase-js'
+import Constants from 'expo-constants'
 import * as SecureStore from 'expo-secure-store'
 import 'react-native-url-polyfill/auto'
 
@@ -15,11 +16,23 @@ const ExpoSecureStoreAdapter = {
   }
 }
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || ""
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || ""
+// Types on this are wrong. This exists, and `host` does not.
+const origin = (
+  Constants?.expoConfig as unknown as { hostUri?: string }
+)?.hostUri
+  ?.split(':')
+  .shift()
 
+if (!origin) throw new Error('Could not determine origin')
+
+const supabaseUrl = `http://${origin}:54321`
+
+// const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || ''
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || ''
+
+console.log({ supabaseUrl })
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Supabase URL and Anon Key must be provided")
+  throw new Error('Supabase URL and Anon Key must be provided')
 }
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
