@@ -9,7 +9,7 @@ const fetchPaymentSheetParams = async (amount: number) => {
   const { data, error } = await supabase.functions.invoke('payment-sheet', {
     body: { amount }
   })
-  console.log({ data, error })
+  //   console.log({ data, error })
   if (data) {
     return data
   }
@@ -18,11 +18,11 @@ const fetchPaymentSheetParams = async (amount: number) => {
 }
 
 export const initialisePaymentSheet = async (amount: number) => {
-  console.log({ amount })
   const { paymentIntent, publishableKey } = await fetchPaymentSheetParams(
     amount
   )
-  console.log({ paymentIntent, publishableKey })
+  //   console.log({ amount })
+  //   console.log({ paymentIntent, publishableKey })
   if (!paymentIntent || !publishableKey) {
     Alert.alert('/Error fetching payment sheet params/')
     return false
