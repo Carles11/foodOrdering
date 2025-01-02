@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Image,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View
@@ -44,7 +45,7 @@ const ProductDetailsScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Stack.Screen options={{ title: product?.name }} />
       <RemoteImage
         path={product?.image}
@@ -74,7 +75,7 @@ const ProductDetailsScreen = () => {
       </View>
       {product && <Text style={styles.price}>${product.price}</Text>}
       <Button text="Add to card" onPress={addToCard} />
-    </View>
+    </ScrollView>
   )
 }
 
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 20,
-    flex: 1
+    flex: 1,
+    marginBottom: 11
   },
 
   price: {

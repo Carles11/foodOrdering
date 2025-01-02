@@ -30,7 +30,7 @@ const supabaseUrl = `http://${origin}:54321`
 // const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || ''
 
-console.log({ supabaseUrl })
+console.log({ supabaseUrl, supabaseAnonKey })
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Supabase URL and Anon Key must be provided')
 }
