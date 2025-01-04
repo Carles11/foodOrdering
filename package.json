@@ -45,7 +45,10 @@
     "react-native-screens": "~4.4.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.13",
-    "@stripe/stripe-react-native": "0.38.6"
+    "@stripe/stripe-react-native": "0.38.6",
+    "expo-notifications": "~0.29.11",
+    "expo-device": "~7.0.1",
+    "expo-constants": "~17.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
