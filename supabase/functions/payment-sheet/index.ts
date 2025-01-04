@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { stripe } from '../_utils/stripe.ts'
+import { createOrRetrieveProfile } from '../_utils/supabase.ts'
 
 console.log('Hello from Functions!')
 
@@ -15,18 +16,26 @@ interface PaymentResponse {
 serve(async (req: Request): Promise<Response> => {
   try {
     const { amount }: PaymentRequest = await req.json()
+    const customer = await createOrRetrieveProfile(req)
+    console.log('serving function customer: ', { customer })
+
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      { customer: customer },
+      { apiVersion: '2020-08-27' }
+    )
 
     // Create a PaymentIntent so that the SDK can charge the logged in customer.
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
-      currency: 'usd'
-      // customer: customer,
+      currency: 'usd',
+      customer: customer
     })
+
     const res: PaymentResponse = {
       publishableKey: Deno.env.get('EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY'),
-      paymentIntent: paymentIntent.client_secret
-      // ephemeralKey: ephemeralKey.secret,
-      // customer: customer,
+      paymentIntent: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer
     }
     return new Response(JSON.stringify(res), {
       headers: { 'Content-Type': 'application/json' },

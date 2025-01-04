@@ -9,8 +9,9 @@ const fetchPaymentSheetParams = async (amount: number) => {
   const { data, error } = await supabase.functions.invoke('payment-sheet', {
     body: { amount }
   })
-  //   console.log({ data, error })
   if (data) {
+    console.log({ data, error })
+
     return data
   }
   Alert.alert('_Error fetching payment sheet params_', error.message)
@@ -18,22 +19,24 @@ const fetchPaymentSheetParams = async (amount: number) => {
 }
 
 export const initialisePaymentSheet = async (amount: number) => {
-  const { paymentIntent, publishableKey } = await fetchPaymentSheetParams(
-    amount
-  )
-  //   console.log({ amount })
-  //   console.log({ paymentIntent, publishableKey })
+  const { paymentIntent, publishableKey, customer, ephemeralKey } =
+    await fetchPaymentSheetParams(amount)
+
   if (!paymentIntent || !publishableKey) {
     Alert.alert('/Error fetching payment sheet params/')
     return false
   }
+
   const { error } = await initPaymentSheet({
     merchantDisplayName: 'Charlie´s Pizza',
     paymentIntentClientSecret: paymentIntent,
+    customerId: customer,
+    customerEphemeralKeySecret: ephemeralKey,
     defaultBillingDetails: {
       name: 'Jane Doe'
     }
   })
+
   if (!error) {
     console.log('Success initializing payment sheet')
     return true

@@ -13,7 +13,6 @@ type OrderListItemProps = {
 
 const OrderListItem = ({ order }: OrderListItemProps) => {
   // const segments = useSegments()
-  console.log({ order })
   const [orderInfo, setOrderInfo] = useState<Tables<'orders'>>(order)
 
   useEffect(() => {

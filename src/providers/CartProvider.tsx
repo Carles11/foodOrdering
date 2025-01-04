@@ -79,7 +79,7 @@ const CartProvider = ({ children }: PropsWithChildren<{}>) => {
     }
 
     const payed = await openPaymentSheet()
-    console.log('payydd?', { payed })
+    console.log('payed?', { payed })
     if (!payed) {
       return
     }
@@ -107,6 +107,7 @@ const CartProvider = ({ children }: PropsWithChildren<{}>) => {
       }
     })
   }
+
   return (
     <CartContext.Provider
       value={{ items, addItem, updateQuantity, total, checkout }}
